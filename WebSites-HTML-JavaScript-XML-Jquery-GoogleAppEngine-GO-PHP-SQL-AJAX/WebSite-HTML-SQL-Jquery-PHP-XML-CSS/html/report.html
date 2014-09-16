@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <link rel="stylesheet" type="text/css" href="../css/burnsite.css">
+   <script type="text/javascript" src="../jquery/jquery-1.9.1.min.js"></script>
+   <script type="text/javascript" src="../jquery/jquery.validate.js"></script>
+   <script type="text/javascript">
+      $(document).ready(function() {
+	    $("#burnPileForm").validate();
+	});
+   </script>
+   <title>Final Project Burn Pile</title>
+</head>
+<body>
+
+   <div id="container" class="container">
+
+      <div id="header" class="headder">
+        <h1>Final Project Burn Pile</h1>
+
+	<div id="topMenu" class="topMenu">
+		<a href="./index.html" class="topMenuLink">Home</a> 
+		<a href="./regBurn.html" class="topMenuLink">Manage Piles</a>
+		<a href="./regPickup.html" class="topMenuLink">Piles for pickup</a>
+		<a href="./report.html" class="topMenuLink">Report a burn</a>
+		<a href="./account.html" class="topMenuLink">Create or Manage Account</a>
+	</div>
+
+      </div>
+
+      <div id="main" class="main">
+
+         <div id="menu" class="noteLeft">
+	 	<em style="color:red;">If this is an emergency call 911 and your local fire department before submitting this form.</em>
+         </div>
+
+
+         <div id="content" class="content">
+		<form action="../php/regBurn.php" method="POST" id="burnPileForm">
+			This form is to report a possible unauthorized burn.  Please review the regulations before reporting.
+			<br>(* Required)
+			<table>
+				<tr>
+					<td>* Materials</td><td><input name="materials" maxlength="20" class="required" /><span id='#FnameErr'></span></td>
+				</tr>
+				<tr>
+					<td>Time you found the burn</td><td><select name="burnTimeH" />
+							<option value="04">4 AM</option>
+							<option value="05">5 AM</option>
+							<option value="06">6 AM</option>
+							<option value="07">7 AM</option>
+							<option value="08">8 AM</option>
+							<option value="09">9 AM</option>
+							<option value="10">10 AM</option>
+							<option value="11">11 AM</option>
+							<option value="12">12 PM</option>
+							<option value="13">1 PM</option>
+							<option value="14">2 PM</option>
+							<option value="15">3 PM</option>
+							<option value="16">4 PM</option>
+							<option value="17">5 PM</option>
+							<option value="18">6 PM</option>
+							<option value="19">7 PM</option>
+							<option value="20">8 PM</option>
+							<option value="21">9 PM</option>
+							<option value="22">10 PM</option>
+						</select>
+						<select name="burnTimeM" />
+							<option value="00">00</option>
+							<option value="05">05</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="25">25</option>
+							<option value="30">30</option>
+							<option value="35">35</option>
+							<option value="40">40</option>
+							<option value="45">45</option>
+							<option value="50">50</option>
+							<option value="55">55</option>
+						</select>
+					</td>
+
+				<tr>
+					<td>*Address 1</td><td><input name="address1" maxlength="38" class="required" /><span id='#FnameErr'></span></td>
+				</tr>
+				<tr>
+					<td>Address 2</td><td><input name="address2" maxlength="38"/></td>
+				</tr>
+
+				<tr>
+					<td>*City</td><td><input name="city" maxlength="15" class="required" /><span id='#FnameErr'></span></td>
+				</tr>
+				<tr>
+					<td>*State</td><td><input name="state" size="2" maxlength="2" class="required" /><span id='#FnameErr'></span></td>
+				</tr>
+				<tr>
+					<td>Zip</td><td><input name="zip5" size="5" maxlength="5"/></td>
+				</tr>
+				<tr>
+					<td><button type="submit" name="action" value="report">Submit</button> <button type="reset">Clear</button></td>
+				</tr>
+			</table>
+			<input type="hidden" name="page" value="report.html"/>
+		</form>
+	</div>
+      </div>
+      <div id="footer" class="footer">
+	
+      </div>
+    </div>
+
+</body>
+</html>

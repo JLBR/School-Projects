@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/HTML; charset=iso-8859-1" />
+
+<SCRIPT TYPE="text/javascript" SRC="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></SCRIPT>
+<SCRIPT TYPE="text/javascript" SRC="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></SCRIPT>
+<SCRIPT TYPE="text/javascript" SRC="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></SCRIPT>
+
+<LINK REL="stylesheet" TYPE="text/css" HREF="css/style.css">
+</HEAD>
+
+<BODY>
+<BR>
+<FORM ID="infoSearchForm" ACTION="editprofile.php" METHOD="POST">
+	<FIELDSET style="width:775px;border:1px;border-style:solid;"><LEGEND>User Information Search</LEGEND>
+		Please enter information here to retrieve your profile information for editing.<BR /><BR />
+		<LABEL FOR="username">Username</LABEL><BR />
+		<INPUT TYPE="text" NAME="username" VALUE="" />
+		<BR /><BR />
+		<INPUT TYPE="submit" VALUE="Search"/>
+	</FIELDSET>
+</FORM>
+
+<SCRIPT>
+	$("#infoSearchForm").validate();
+</SCRIPT>
+
+</BODY>
+</HTML>

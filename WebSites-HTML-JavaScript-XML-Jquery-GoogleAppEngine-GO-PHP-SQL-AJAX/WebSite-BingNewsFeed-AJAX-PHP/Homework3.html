@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+   <script type="text/javascript" src="../jquery/jquery-1.9.1.min.js"></script>
+   <script type="text/javascript" src="../jquery/jquery.validate.js"></script>
+   <script type="text/javascript" src="./Bing/MyBingNews.js"></script>
+
+   <script type="text/javascript">
+
+      var pageCeleb = {
+	FName: null,
+	LName: null,
+	CID: null,
+	twitter: null
+	};
+
+      var results = null;
+
+      var menu ="";
+
+      function errorFunction(jqXHRobj, textStatus, errorThrown){
+         $("#footer").text("error occurred: "+jqXHRobj.status+" "+textStatus +" "+errorThrown);
+      }
+
+      function deleteC(){
+	try{
+		var url = "./php/deleteReccord.php?CID="+pageCeleb.CID;
+      		$.ajax({
+			type:"get",
+			url: url,
+          		success:loadPage,
+          		error:errorFunction
+      		});
+
+	} catch(err){
+        	errText = "Error in loadPage() \n\n"+err.message;
+    	    	alert(errText);
+        }
+      }
+
+      function loadPage(){
+	try{
+      		$.ajax({
+			type:"get",
+			url:"./php/getAllCleb.php",
+          		success:allCelebFunction,
+         		error:errorFunction
+      		});
+
+	} catch(err){
+        	errText = "Error in loadPage() \n\n"+err.message;
+    	    	alert(errText);
+        }
+      }
+      
+      function allCelebFunction(data, info){
+		results = jQuery.parseJSON(data);
+		var i = 0;
+		$('#menu').empty();
+
+		$.each(results, function(i){
+			$('#menu').append("<div id='CID_"+results[i].CELEB_ID+"' style='cursor:pointer'>"
+				           +results[i].FName+" "+results[i].LName+"</div>");
+		});
+		
+		pageCeleb.FName = results[i].FName;
+		pageCeleb.LName = results[i].LName;
+		pageCeleb.CID = menu = results[i].CELEB_ID;
+		pageCeleb.twitter = results[i].Twitter;
+		
+		var lastMenu = "#CID_"+menu;
+		menu = "CID_"+menu;
+		$(lastMenu).css({'background-color':'#FEFFEF'});
+		celebPageUpdate();
+      }
+	
+      function celebPageUpdate(){
+		var tempS = pageCeleb.FName+" "+pageCeleb.LName;
+		$('#news').text("Loading news");
+		search(tempS, 'News');
+		$('#twitter').html("<a href='https://www.twitter.com/"+pageCeleb.twitter+"'>Twitter: "
+			+pageCeleb.twitter+"</a>");
+		$('#picture').html("<img src='php/getClebPic.php?CID="+pageCeleb.CID+
+					"' style='max-height:150px;max-width:150px;' />");
+      }
+	
+      function setCeleb(CID){
+		var index = 0;
+		$.each(results, function(i){
+			index = i;
+			if(results[i].CELEB_ID == CID)
+				return false;
+		});
+		pageCeleb.FName = results[index].FName;
+		pageCeleb.LName = results[index].LName;
+		pageCeleb.CID = results[index].CELEB_ID;
+		pageCeleb.twitter = results[index].Twitter;
+					
+      }
+     	
+      $(document).ready(function() {
+		$("#celebForm").validate();
+
+		loadPage();
+
+		$('#addNew').on('click',function(){
+			$('#update').css('display', 'block');
+			$('#addCeb').val("Add");
+			$('input[name=action]').val('addNew');
+			$('input[name=Fname]').val("");
+			$('input[name=Lname]').val("");
+			$('input[name=CID]').val("");
+			$('input[name=twitter]').val("");
+			$('input[name=cPic]').val("");
+		});
+
+		$('#updateC').on('click',function(){
+			$('#update').css('display', 'block');
+			$('#addCeb').val("Update");
+			$('input[name=action]').val('update');
+			$('input[name=Fname]').val(pageCeleb.FName);
+			$('input[name=Lname]').val(pageCeleb.LName);
+			$('input[name=CID]').val(pageCeleb.CID);
+			$('input[name=twitter]').val(pageCeleb.twitter);
+		});
+
+		$('#deleteC').on('click', function(){
+			deleteC();
+		});
+
+	        $("#menu").on('click',function(e) {
+            
+			if((e.target.id.substring(0,3) == 'CID')){
+	      			$('#update').css('display', 'none');
+				
+				
+				var CID = e.target.id.substring(4);
+				var oldCID =  pageCeleb.CID;
+
+				if(CID != oldCID){
+					
+					var oldMenu = "#"+menu;
+					menu = e.target.id;
+	    				$(oldMenu).css({'background-color':''});
+        				$(e.target).css({'background-color':'#FEFFEF'});
+					
+					setCeleb(CID);
+					celebPageUpdate();
+				}
+			 }
+
+   	        });
+
+      });
+   </script>
+
+   <title>Homework3 Celeb Stalker</title>
+</head>
+<body style="font-family: sans-serif;">
+
+   <div id="container" style="width:900px">
+
+      <div id="header" style="background-color:#FFA500;text-align:center;">
+        <h1 style="margin-bottom:0;">Homework 3 Celeb Stalker</h1>
+      </div>
+
+      <div id="main" style="background-color:#FFD700;width:900px;float:left;">
+
+         <div id="menux" style="width:150px;float:left;">
+		<button type="button" id="addNew">Add New</button><br>
+		<button type="button" id="updateC">Update </button><br>
+		<button type="button" id="deleteC">Delete </button><br>
+		Menu
+	 
+         	<div id="menu" style="width:150px;float:left;"></div>
+         </div>
+
+
+         <div id="content" style="background-color:#EEEEEE;width:750px;float:left;">
+		<div id="update" style="display: none;">
+			<form id="celebForm" action="./php/addReccord.php"  
+				method="post" enctype="multipart/form-data" 
+				class="cmxform">
+			<input type="hidden" name="action" value="addNew" />
+			<input type="hidden" name="CID" value="0" />
+			<div>
+				First Name: <input name="Fname" class="required" /><span id='#FnameErr'></span>
+				Last Name: <input name="Lname" class="required" /><span id='#LnameErr'></span>
+			</div>
+			Picture:<input type="file" name="cPic" />
+			Twitter ID:<input name="twitter" />
+			<div><input type="submit" id="addCeb" value="Add" /></div>
+			</form>
+		</div>
+		<div id="picture" style="width:150px;height:150px;float:left;">	
+			
+		</div>
+
+		<div id="news" style="width:350px;float:left;">News</div>
+		
+		<div id="twitter" style="width:250px;float:left;">
+			Twitter
+			</div>
+         
+		</div>
+      </div>
+      <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+	
+      </div>
+
+   </div>
+</body>
+</html>

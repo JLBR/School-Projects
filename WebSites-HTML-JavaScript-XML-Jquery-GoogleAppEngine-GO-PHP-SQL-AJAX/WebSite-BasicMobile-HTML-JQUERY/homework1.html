@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>Homework 1</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="./jquery/jquery.mobile-1.3.1.min.css" />
+	<script src="./jquery/jquery-1.10.2.min.js"></script>
+	<script src="./jquery/jquery.mobile-1.3.1.min.js"></script>
+
+	<script>
+	       $(document).bind('pageinit', function() {
+	            if (navigator.geolocation) {
+	                  navigator.geolocation.getCurrentPosition(callbackFunction);
+	             } else {
+	                 alert("Not supported");
+	             }
+	       });
+	function callbackFunction(pos) {
+	   $("#latlong").text("lat:"+pos.coords.latitude+";long:"+pos.coords.longitude);
+	 }  
+    </script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-theme="a" data-role="header">
+		<h1>Jimmy</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+
+		<div data-theme="b" data-role="header">
+			<h1>Music</h1>
+		</div><!-- /header -->
+
+		<table data-role="table" id="my-table" data-mode="reflow" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="b" >
+			<thead>
+				<tr class="ui-bar-d">
+					<th>Artist</th>
+					<th>Song</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>High and Mighty Color</td>
+					<td><a href="http://www.youtube.com/watch?v=75Ro7s6bd-U">一輪の花(Ichirin no Hana)</a></td>
+				</tr>
+				<tr>
+					<td>Bivattchee</td>
+					<td><a href="http://www.youtube.com/watch?v=2pToYNWs3ok">太陽の真ん中へ(Taiyo No Mannaka E)</a></td>
+				</tr>
+				<tr>
+					<td>浜崎あゆみ(Ayumi Hamasaki)</td>
+					<td><a href="http://www.youtube.com/watch?v=ttP3O2xJzWg">Sunrise</a></td>
+				</tr>
+				<tr>
+					<td>AKB48</td>
+					<td><a href="http://www.youtube.com/watch?v=LQxMsvcYfO8">会いたかった(aitakatta)</a></td>
+				</tr>
+				<tr>
+					<td>Gunther</td>
+					<td><a href="http://www.youtube.com/watch?v=j8rm56hTDDs">ding ding dong</a></td>
+				</tr>
+				<tr>
+					<td>Hitomi</td>
+					<td><a href="http://www.youtube.com/watch?v=wu7__Sa2Lpo">Continued Story</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div data-theme="b" data-role="header">
+			<h1>Movies</h1>
+		</div><!-- /header -->
+
+		<ul data-role="listview" data-inset="true">
+			<li><a href="http://www.youtube.com/watch?v=pd0bqLQrtdE">Red Cliff</a></li>
+			<li><a href="http://www.youtube.com/watch?v=ZnlPgo9TaGo">Act of Valor</a></li>
+			<li><a href="http://www.youtube.com/watch?v=yz_eNUMWX4A">Ferris Bueller's Day Off</a></li>
+			<li><a href="http://www.youtube.com/watch?v=-ssId2r7F1I">Fletch</a></li>
+			<li><a href="http://www.youtube.com/watch?v=Ql1uLyuWra8">Hackers</a></li>
+			<li><a href="http://www.youtube.com/watch?v=snTaSJk0n_Y">Dr. Strangelove</a></li>
+		</ul>		
+
+		<div data-theme="b" data-role="header">
+			<h1>Your location</h1>
+		</div><!-- /header -->
+
+		 <div id="latlong"></div> 
+
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+</body>
+</html>

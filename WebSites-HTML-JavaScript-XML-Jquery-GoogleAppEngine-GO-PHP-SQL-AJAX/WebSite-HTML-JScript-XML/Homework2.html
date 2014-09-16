@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="jquery-1.9.1.min.js"></script>
+<script src="jquery.cookie.js"></script> 
+<script>
+
+   var xml =[];
+
+   function startAjax(){
+     try{
+	
+        $.ajax({
+          url:"Books.xml",
+          success:callbackFunction,
+          error:errorFunction
+        });
+
+     } catch(err){
+        errText = "Error in startAjax() \n\n"+err.message;
+        alert(errText);
+     }
+   }
+
+
+   function errorFunction(data,info){
+      $("#content").text("error occurred:"+info);
+   }
+
+   function callbackFunction(data,info){
+      <!-- adds catagories to the menu with the id of cat+catagory -->
+      var tempCats =[];
+      $(data).find("catagory").each(function(){
+        var temp = $(this).text();
+        if ($.inArray(temp, tempCats)===-1){
+           $("#menu").append("<div id='cat"+temp+"' style='cursor:pointer'>"+$(this).text()+"</div>");
+           tempCats.push(temp);
+        }
+      });
+
+      var userCat = "";
+
+      if(!window["localStorage"]){
+         if(getCookie("userCat") == null){
+            $.cookie("userCat", $(data).find("catagory:first").text(), {expires:365});
+         }
+         userCat = $.cookie("userCat");
+      } else {
+         if(localStorage.getItem("userCat") == null){
+            localStorage["userCat"]= $(data).find("catagory:first").text();
+         }
+         userCat = localStorage["userCat"];
+      }
+
+     var currentMenu = "#cat"+userCat;
+     $(currentMenu).css({'background-color':'#FEFFEF'});
+
+     xml = $(data).find("book");
+     getBooks(xml, userCat);
+
+    }
+
+   function getBooks(books, catagory){
+      $("#content").text("");
+      books.each(function () {
+        var temp = $(this);
+
+        if (temp.find("catagory").text() == catagory){
+           $("#content").append("<div style='font-weight:bold'><a href='"+temp.find('shop').text()+"'>"+temp.find('title').text()+"</a></div>");
+           $("#content").append("<div>"+temp.find('author').text()+"</div><br>");
+           $("#content").append("<div>"+temp.find('description').text()+"</div><br>");
+        }
+      });
+   }
+
+   $(document).ready(function() {
+      startAjax();
+
+      try{
+         $("#menu").bind('click',function(e) {
+            
+            var cat = "";
+            if(!window["localStorage"]){
+              cat = $.cookie("userCat");
+              $.cookie("userCat", e.target.innerHTML, {expires:365});
+            } else {
+              cat = localStorage["userCat"];
+              localStorage["userCat"] = e.target.innerHTML;
+            }
+
+            var oldMenu = "#cat"+cat;
+
+            $(oldMenu).css({'background-color':''});
+            $(e.target).css({'background-color':'#FEFFEF'});
+ 
+            getBooks(xml, e.target.innerHTML);
+         });
+
+     } catch(err){
+        errText = "Error in loading the document\n\n"+err.message;
+        alert(errText);
+     }
+   });
+</script>
+
+   <title>Homework2</title>
+</head>
+<body style="font-family: sans-serif;">
+<!-- layout from W3Schools.com -->
+
+   <div id="container" style="width:500px">
+
+      <div id="header" style="background-color:#FFA500;">
+        <h1 style="margin-bottom:0;">Homework 2 Booklist</h1>
+      </div>
+
+      <div id="main" style="background-color:#FFD700;width:500px;float:left;">
+
+         <div id="menu" style="width:100px;float:left;">
+         </div>
+
+
+         <div id="content" style="background-color:#EEEEEE;width:400px;float:left;">
+         </div>
+      </div>
+      <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+      </div>
+
+   </div>
+</body>
+</html>

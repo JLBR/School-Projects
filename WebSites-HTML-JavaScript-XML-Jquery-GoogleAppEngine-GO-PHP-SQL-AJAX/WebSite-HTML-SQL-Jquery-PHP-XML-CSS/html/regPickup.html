@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <link rel="stylesheet" type="text/css" href="../css/burnsite.css">
+   <script type="text/javascript" src="../jquery/jquery-1.9.1.min.js"></script>
+   <script type="text/javascript">
+
+	function errorFunction(jqXHRobj, textStatus, errorThrown){
+        	$("#footer").text("error occurred: "+jqXHRobj.status+" "+textStatus +" "+errorThrown);
+      	}
+
+      function loadPiles(){
+		try{
+      			$.ajax({
+				type:"get",
+				url:"../php/burnList.php",
+	          		success:listPile,
+        	 		error:errorFunction
+      			});
+
+		} catch(err){
+        		errText = "Error in loadPage() \n\n"+err.message;
+    	    		alert(errText);
+	        }
+      }
+
+      function loadPage(){
+	try{
+      		$.ajax({
+			type:"get",
+			url:"../php/session.php",
+          		success:loggedin,
+         		error:errorFunction
+      		});
+
+	} catch(err){
+        	errText = "Error in loadPage() \n\n"+err.message;
+    	    	alert(errText);
+        }
+      }
+
+	function loggedin(data, info)
+	{
+		userName = data;
+		
+		if(userName != "")
+		{
+			$("#userName").append("<div>"+userName+"</div>");
+
+			$("#loginForm").attr("class", "subLogin");
+			$("#logoutForm").attr("class", "postLogin");
+		}
+		else
+		{
+			$("#newBurn").attr("disabled", "disabled");
+		}
+	}
+
+	function listPile(data, info)
+	{
+		var results = jQuery.parseJSON(data);
+	
+		var i = 0;
+
+
+		$.each(results, function(i){
+			var pileID = results[i].PILE_ID;
+			var address1 = results[i].Address1;
+			var city = results[i].City;
+			var state = results[i].State;
+			var email = results[i].Email;
+
+			$('#content').append("<div id='"+pileID+"' class='pile'>");
+			$('#content').append("<div class='divPic'><img src='../php/getPilePic.php?PID="+pileID +"' class='pilePic'  /></div>");
+			$('#content').append("<div class='address' >"+address1+"</div>");
+			$('#content').append("<div class='address' >"+city+", "+state+"</div>");
+			$('#content').append("<div class='email' ><a href='mailto:"+email+"'>Request Pickup</a></div>");
+			$('#content').append("</div>");
+		});
+	}
+
+	$(document).ready(function() {
+		loadPage();
+		loadPiles();
+	});
+
+   </script>
+   <title>Final Project Burn Pile</title>
+</head>
+<body>
+
+   <div id="container" class="container">
+
+      <div id="header" class="headder">
+        <h1>Final Project Burn Pile</h1>
+
+	<div id="topMenu" class="topMenu">
+		<a href="./index.html" class="topMenuLink">Home</a> 
+		<a href="./regBurn.html" class="topMenuLink">Manage Piles</a>
+		<a href="./regPickup.html" class="topMenuLink">Piles for pickup</a>
+		<a href="./report.html" class="topMenuLink">Report a burn</a>
+		<a href="./account.html" class="topMenuLink">Create or Manage Account</a>
+	</div>
+
+      </div>
+
+      <div id="main" class="main">
+
+         <div id="menu" class="menuLeft">
+		 <div id="userName" class="userName"></div>
+		 <div id="loginForm" class="loginForm">
+			<form id="login" method="POST" action="../php/login.php">
+			<div id="userName" class="userName">User Name<input name="UName" type="text" maxlength="12"/></div>
+			<div id="userPassword" class="userPassword">Password<input name="PWord" type="password" maxlength="16"/></div>
+			<div id="submitB">
+				<button type="submit">Login</button>
+				<button type="reset">Reset</button>
+			</div><input type="hidden" name="page" value="regPickup.html"/>
+			</form>
+		 </div>
+		 <div id="logoutForm" class="subLogin">
+			<form id="logout" method="POST" action="../php/login.php">
+				<button type="submit">Logout</button>
+			<input type="hidden" name="page" value="regPickup.html"/>
+			</form>
+		 </div>
+	</div>
+
+
+         <div id="content" class="content">
+
+	</div>
+      </div>
+      <div id="footer" class="footer">
+	
+      </div>
+    </div>
+
+</body>
+</html>

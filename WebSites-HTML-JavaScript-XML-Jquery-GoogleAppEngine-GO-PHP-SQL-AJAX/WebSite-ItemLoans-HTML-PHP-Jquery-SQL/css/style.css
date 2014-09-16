@@ -1,0 +1,96 @@
+body {
+	width:800px;
+	margin:auto;
+	font-family:sans-serif;
+	font-size:11pt;
+}
+
+h1 {
+	text-align:center;
+	color:#003366;
+	font-size:26pt;
+}
+
+h3 {
+	color:#006600;
+	font-weight:bold;
+}
+
+table.topmenu {
+	font-family:sans-serif;
+	border:5px solid #003366;
+}
+
+th {font-weight:bold;}
+
+.menubar{
+	text-align:center;
+	background-color:#880000;
+	font-weight:bold;
+	color:#FFFFFF;
+	font-size:10pt;
+}
+
+.footer{text-align:center}
+
+fieldset{
+	width: 365px;
+	border: 1px;
+	border-style: solid;
+}
+
+legend{
+	border-style: solid; 
+	background-color: #003366;
+	font-family: Tahoma, Arial, Helvetica;
+	font-weight: bold;
+	font-size: 12pt;
+	color: white;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+label.field{
+	float:left;
+	text-align: right;
+	width: 150px;
+}
+
+label.space{
+	text-align: right;
+	width: 150px;
+	font-size: 1pt;	
+}
+
+input{
+	margin-bottom:5px;
+}
+
+select{
+	margin-bottom:5px;
+}
+
+input.textbox-300{
+	width: 300px;
+	float: left;
+}
+
+fieldset p{
+	clear: both;
+	padding: 5px;
+}
+
+dl.inline dt, dl.inline dd {
+    display: inline;
+}
+
+dl.inline dt {
+    font-weight: bold;
+}
+
+td.fieldname{
+	float:left;
+	text-align:right;
+	font-weight:bold;
+	margin-left:20px;
+}

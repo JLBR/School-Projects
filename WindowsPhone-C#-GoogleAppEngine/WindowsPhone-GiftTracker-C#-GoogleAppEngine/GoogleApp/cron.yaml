@@ -1,0 +1,7 @@
+cron:
+- description: remove old sessions
+  url: /remove
+  schedule: every 5 minutes
+- description: remove old events
+  url: /clean
+  schedule: every 24 hours

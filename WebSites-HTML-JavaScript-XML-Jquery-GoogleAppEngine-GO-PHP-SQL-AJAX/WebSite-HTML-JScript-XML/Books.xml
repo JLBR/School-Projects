@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<root>
+<book id="0">
+   <title>Linux Firewalls</title>
+   <catagory>Security</catagory>
+   <author>Michael Rash</author>
+   <shop>http://nostarch.com/firewalls.htm</shop>
+   <description>Linux Firewalls discusses the technical details of the iptables firewall and the Netfilter framework that are built into the Linux kernel, and it explains how they provide strong filtering, Network Address Translation (NAT), state tracking, and application layer inspection capabilities that rival many commercial tools. You'll learn how to deploy iptables as an IDS with psad and fwsnort and how to build a strong, passive authentication layer around iptables with fwknop.</description>
+</book>
+<book id="1">
+   <title>Manga Guide to Relativity</title>
+   <catagory>Science</catagory>
+   <author>Hideo Nitta, Masafumi Yamamoto, Keita Takatsu, and Trend-pro Co., Ltd.</author>
+   <shop>http://nostarch.com/mg_relativity.htm</shop>
+   <description>Follow along with The Manga Guide to Relativity as Minagi learns about the non-intuitive laws that shape our universe. Before you know it, you'll master difficult concepts like inertial frames of reference, unified spacetime, and the equivalence principle. You'll see how relativity affects modern astronomy and discover why GPS systems and other everyday technologies depend on Einstein's extraordinary discovery. </description>
+</book>
+<book id="2">
+   <title> A Developer's Guide to the Future of Web Design</title>
+   <catagory>Programming</catagory>
+   <author>Peter Gasston</author>
+   <shop>http://nostarch.com/css3</shop>
+   <description>The Book of CSS3 distills the dense technical language of the CSS3 specification into plain English and shows you what CSS3 can do right now, in all major browsers. With real-world examples and a focus on the principles of good design, it extends your CSS skills, helping you transform ordinary markup into stunning, richly-styled web pages.</description>
+</book>
+<book id="3">
+   <title>Steal This Computer Book 4.0</title>
+   <catagory>Security</catagory>
+   <author>Wallace Wang</author>
+   <shop>http://nostarch.com/stcb4.htm</shop>
+   <description>The completely revised fourth edition of this offbeat, non-technical book examines what hackers do, how they do it, and how you can protect yourself. Written in the same informative, irreverent, and entertaining style that made the first three editions hugely successful, Steal This Computer Book 4.0 will expand your mind and raise your eyebrows. New chapters discuss the hacker mentality, social engineering and lock picking, exploiting P2P file-sharing networks, and how people manipulate search engines and pop-up ads to obtain and use personal information. Wang also takes issue with the media for "hacking" the news and presenting the public with self-serving stories of questionable accuracy. Inside, you'll discover:</description>
+</book>
+<book id="4">
+   <title>Bug Hunter's Diary</title>
+   <catagory>Security</catagory>
+   <author>Tobias Klein</author>
+   <shop>http://nostarch.com/bughunter</shop>
+   <description>A Bug Hunter's Diary follows security expert Tobias Klein as he tracks down and exploits bugs in some of the world's most popular software, like Apple's iOS, the VLC media player, web browsers, and even the Mac OS X kernel. In this one-of-a-kind account, you'll see how the developers responsible for these flaws patched the bugs-or failed to respond at all. As you follow Klein on his journey, you'll gain deep technical knowledge and insight into how hackers approach difficult problems and experience the true joys (and frustrations) of bug hunting</description>
+</book>
+<book id="5">
+   <title>Manga Guide to Molecular Biology</title>
+   <catagory>Science</catagory>
+   <author> Masaharu Takemura, Sakura, and Becom Co., Ltd.</author>
+   <shop>http://nostarch.com/mg_mbiology.htm</shop>
+   <description>Join them in The Manga Guide to Molecular Biology, and learn all about DNA, RNA, proteins, amino acids, and more. Along the way, you'll see chemical reactions first-hand and meet entertaining characters like Enzyme Man and Drinkzilla, who show how the liver metabolizes alcohol.</description>
+</book>
+</root>
